@@ -3,9 +3,8 @@ import { NextResponse } from 'next/server'
 import { createOrder } from '@/lib/actions/order.actions'
 
 export async function POST(request: Request) {
-  console.log("Hello")
   const body = await request.text()
-  console.log(body)
+
   const sig = request.headers.get('stripe-signature') as string
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
