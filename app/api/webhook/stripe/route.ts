@@ -12,8 +12,10 @@ export async function POST(request: Request) {
 
   try {
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
+    console.log("ERORRR!111112312")
   } catch (err) {
     return NextResponse.json({ message: 'Webhook error', error: err })
+    console.log("ERORRRRRRRR");
   }
 
   // Get the ID and type
@@ -30,7 +32,7 @@ export async function POST(request: Request) {
       totalAmount: amount_total ? (amount_total / 100).toString() : '0',
       createdAt: new Date(),
     }
-
+    console.log("ORDER?",order);
     const newOrder = await createOrder(order)
     return NextResponse.json({ message: 'OK', order: newOrder })
   }
